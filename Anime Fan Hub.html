@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Anime Fan Hub</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Hanken+Grotesk:wght@400;500&display=swap">
+<style>
+:root{--bg:#0d0b22;--card:#171437;--pink:#ff7eb6;--sky:#6fd3ff;--gold:#ffd36b;--ink:#f4f0ff;--mute:#a49fc8;
+color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.05rem/1.6 "Hanken Grotesk",system-ui,sans-serif}
+h1,h2,h3{font-family:"Dela Gothic One",Impact,sans-serif;font-weight:400;margin:0;line-height:1.1}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+.wrap{max-width:64rem;margin:0 auto;padding:0 1.5rem}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;display:flex;gap:1.4rem;overflow-x:auto;padding:.9rem 1.5rem;background:rgba(13,11,34,.92);border-bottom:1px solid rgba(255,126,182,.25);white-space:nowrap}
+.nav a{color:var(--mute);text-decoration:none;font-size:.95rem}
+.nav a:hover{color:var(--pink)}
+.hero{min-height:88vh;display:grid;place-items:center;text-align:center;position:relative;overflow:hidden;
+background:radial-gradient(ellipse 60% 50% at 50% 100%,rgba(255,126,182,.35),transparent 70%),radial-gradient(ellipse 50% 40% at 20% 20%,rgba(111,211,255,.18),transparent 70%),var(--bg)}
+.hero h1{font-size:clamp(3.5rem,14vw,9rem);background:linear-gradient(90deg,var(--pink),var(--gold),var(--sky));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .sub{font:400 1.1rem "Dela Gothic One",sans-serif;letter-spacing:.3em;color:var(--mute);margin-top:.5rem}
+.hero p{max-width:34rem;margin:1.5rem auto 2rem}
+.petal{position:absolute;top:-2rem;width:.7rem;height:.9rem;background:var(--pink);border-radius:80% 0 80% 0;opacity:.7;animation:fall linear infinite}
+@keyframes fall{to{transform:translateY(105vh) rotate(540deg)}}
+.btn{font:500 1rem "Hanken Grotesk",sans-serif;color:#1a0b22;background:linear-gradient(90deg,var(--pink),var(--gold));border:0;padding:.85rem 2rem;cursor:pointer;border-radius:2rem;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,126,182,.4)}
+.btn.alt{background:none;color:var(--pink);border:1px solid var(--pink)}
+.btn.sm{padding:.45rem 1rem;font-size:.9rem}
+section{padding:5rem 0}
+h2{font-size:clamp(1.9rem,5vw,3rem);margin-bottom:.8rem}
+.lede{color:var(--mute);max-width:38rem}
+.alt-bg{background:#110e2b}
+.tabs{display:flex;flex-wrap:wrap;gap:.6rem;margin:1.8rem 0}
+.tab{font:500 .95rem "Hanken Grotesk",sans-serif;color:var(--mute);background:none;border:1px solid rgba(255,126,182,.3);padding:.5rem 1.1rem;border-radius:2rem;cursor:pointer}
+.tab[aria-selected=true]{color:#1a0b22;background:var(--pink);border-color:var(--pink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:1.1rem}
+.card{background:var(--card);border-radius:1rem;overflow:hidden;border:1px solid rgba(255,255,255,.07);display:flex;flex-direction:column}
+.tile{aspect-ratio:16/9;display:grid;place-items:center;font:400 3.2rem "Dela Gothic One",sans-serif;color:rgba(255,255,255,.92)}
+.card .b{padding:1rem 1.1rem 1.2rem;display:flex;flex-direction:column;gap:.35rem;flex:1}
+.card h3{font-size:1.1rem}
+.card em{font-style:normal;color:var(--sky);font-size:.85rem}
+.card p{margin:0 0 .6rem;color:var(--mute);font-size:.95rem;flex:1}
+.list{margin-top:1.5rem;display:flex;flex-wrap:wrap;gap:.6rem;min-height:2.6rem}
+.chip{display:inline-flex;gap:.5rem;align-items:center;background:var(--card);border:1px solid var(--pink);border-radius:2rem;padding:.35rem .5rem .35rem 1rem}
+.chip button{background:none;border:0;color:var(--pink);cursor:pointer;font-size:1.1rem;line-height:1}
+.empty{color:var(--mute);font-family:"Dela Gothic One",sans-serif;font-size:1.1rem}
+.qz{max-width:36rem;margin-top:2rem}
+.qz h3{font-size:1.3rem;margin-bottom:1rem}
+.qz .opt{display:block;width:100%;text-align:left;margin-bottom:.6rem}
+.qz .res{font:400 2.4rem "Dela Gothic One",sans-serif;color:var(--gold);margin:.5rem 0}
+.wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(14rem,1fr));gap:1rem;margin-top:1.8rem}
+.wall figure{margin:0;background:var(--card);border-radius:1rem;overflow:hidden}
+.wall img{display:block;width:100%;aspect-ratio:1;object-fit:cover}
+.wall figcaption{padding:.7rem .9rem;color:var(--mute);font-size:.9rem}
+.up input{position:absolute;opacity:0;width:1px;height:1px}
+.up:focus-within .btn{outline:2px solid var(--pink);outline-offset:3px}
+.status{min-height:1.5rem;margin-top:1rem;color:var(--mute)}
+.status.err{color:#ff8a8a}
+footer{padding:2.5rem 0;color:var(--mute);font-size:.9rem;border-top:1px solid rgba(255,126,182,.2)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<nav class="nav" aria-label="Sections"><a href="#shows">Series</a><a href="#watch">Watchlist</a><a href="#pick">Find your anime</a><a href="#art">Fan art</a></nav>
+
+<header class="hero" id="hero">
+  <div class="wrap">
+    <h1>アニメ</h1>
+    <div class="sub">ANIME FAN HUB</div>
+    <p>From battle epics to quiet slice of life. Explore the series that built a world of fans, and build your own watchlist.</p>
+    <a href="#shows"><button class="btn" type="button">Start exploring</button></a>
+  </div>
+</header>
+
+<section id="shows">
+  <div class="wrap">
+    <h2>Browse by genre</h2>
+    <p class="lede">Pick a genre, then add anything that catches your eye to your watchlist.</p>
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section id="watch" class="alt-bg">
+  <div class="wrap">
+    <h2>My watchlist</h2>
+    <p class="lede">Your queue of series to watch next.</p>
+    <div class="list" id="list" aria-live="polite"></div>
+  </div>
+</section>
+
+<section id="pick">
+  <div class="wrap">
+    <h2>Find your next anime</h2>
+    <p class="lede">Three questions. One recommendation.</p>
+    <div class="qz" id="qz"></div>
+  </div>
+</section>
+
+<section id="art" class="alt-bg">
+  <div class="wrap">
+    <h2>The fan art wall</h2>
+    <p class="lede">Add your own art or photos to preview them here. Only you can see what you add until it is placed on the page permanently.</p>
+    <p style="margin-top:1.5rem"><label class="up"><input type="file" id="upl" accept="image/*" multiple><span class="btn alt" style="display:inline-block">Add your art</span></label></p>
+    <div class="status" id="ast" role="status" aria-live="polite"></div>
+    <div class="wall" id="wall"><div class="empty" id="wempty">The wall is empty. Be the first to share something.</div></div>
+  </div>
+</section>
+
+<footer><div class="wrap">An unofficial fan tribute to anime. All series, characters and titles belong to their original creators and studios. No official images are used here.</div></footer>
+
+<script>
+(function(){
+  var D={
+    Action:[
+      ["Naruto","Ninja action","A lonely outcast trains to become the strongest ninja and earn his village\u2019s respect.","\u5fcd","#ff9a3c,#c0392b"],
+      ["One Piece","Pirate adventure","A rubber-bodied captain sails with his crew in search of the ultimate treasure.","\u6d77","#4facfe,#00467f"],
+      ["Dragon Ball","Martial arts","A boy with a monkey tail grows into a legend, chasing stronger opponents and mystic wishes.","\u9f8d","#ffb347,#ffcc33"],
+      ["My Hero Academia","Superhero school","In a world where most people have powers, a powerless boy trains to become a hero.","\u82f1","#43e97b,#0b6e4f"],
+      ["Jujutsu Kaisen","Dark fantasy","Students fight cursed spirits that feed on human fear, and the cost is steep.","\u546a","#7f5af0,#2a1a5e"]
+    ],
+    Fantasy:[
+      ["Fullmetal Alchemist: Brotherhood","Alchemy epic","Two brothers search for a way to undo a terrible mistake, uncovering a vast conspiracy.","\u92fc","#f6d365,#a35c1a"],
+      ["Demon Slayer","Supernatural action","A kind boy joins a demon-hunting corps to cure his sister and avenge his family.","\u9b3c","#5ee7df,#0b3d4a"],
+      ["Spirited Away","Studio Ghibli film","A girl enters a world of spirits and must work to free her parents and herself.","\u5343","#a1c4fd,#3a5c9a"],
+      ["Hunter x Hunter","Adventure","A boy sets out to become a hunter and find his father in a world full of danger.","\u72e9","#84fab0,#1a6b4a"]
+    ],
+    Drama:[
+      ["Your Name","Romance film","Two strangers swap lives across distance and time, and search for each other.","\u541b","#ff9a9e,#fad0c4"],
+      ["Fruits Basket","Romance drama","A kind girl uncovers a family cursed by animal spirits and begins to heal their hearts.","\u7c43","#fbc2eb,#a6c1ee"],
+      ["Attack on Titan","Dark epic","Humanity hides behind walls from giants, until a boy decides to fight back.","\u5de8","#cfd9df,#4a5568"],
+      ["Sailor Moon","Magical girl","A teenager transforms into a guardian of love and justice, with a team beside her.","\u6708","#ffd1ff,#8a6ad0"]
+    ],
+    SciFi:[
+      ["Cowboy Bebop","Space western","A crew of bounty hunters drifts across the solar system, haunted by their pasts.","\u8c46","#a18cd1,#1f1c5e"],
+      ["Neon Genesis Evangelion","Mecha psychological","Teens pilot giant machines to defend humanity, while facing their own inner struggles.","\u6a5f","#b06ab3,#2d0f4a"],
+      ["Steins;Gate","Time travel thriller","A group of friends accidentally discovers how to send messages into the past.","\u9580","#fccb90,#d57eeb"],
+      ["Solo Leveling","Dungeon fantasy","The weakest hunter gains a mysterious system that lets him level up without limit.","\u5f71","#4a6bff,#050914"]
+    ],
+    Comedy:[
+      ["One Punch Man","Superhero parody","A hero who defeats every enemy in one hit struggles with boredom and fame.","\u62f3","#f9d423,#e14d2a"],
+      ["Spy x Family","Family comedy","A spy, an assassin and a telepathic girl pretend to be a family, each hiding a secret.","\u8ae7","#f6a5c0,#6ea8fe"],
+      ["Haikyuu!!","Sports","A short boy with big ambition joins a volleyball team and chases the court.","\u7fbd","#ff8a5c,#d93f0b"],
+      ["Death Note","Psychological thriller","A student finds a notebook that kills, and a brilliant detective hunts him.","\u6b7b","#434343,#000000"]
+    ]
+  },L=[],tabs=document.getElementById("tabs"),grid=document.getElementById("grid"),list=document.getElementById("list"),cur="Action";
+  var T={Action:"Action",Fantasy:"Fantasy",Drama:"Drama",SciFi:"Sci-Fi",Comedy:"Comedy and more"};
+  try{L=JSON.parse(localStorage.getItem("wl")||"[]")}catch(e){L=[]}
+  function save(){try{localStorage.setItem("wl",JSON.stringify(L))}catch(e){}}
+  function renderList(){
+    list.textContent="";
+    if(!L.length){var e=document.createElement("div");e.className="empty";e.textContent="Nothing queued yet. Add a series to get started.";list.appendChild(e);return}
+    L.forEach(function(n){
+      var c=document.createElement("span");c.className="chip";c.appendChild(document.createTextNode(n));
+      var x=document.createElement("button");x.type="button";x.textContent="\u00d7";x.setAttribute("aria-label","Remove "+n);
+      x.onclick=function(){L=L.filter(function(v){return v!==n});save();renderList();show(cur)};c.appendChild(x);list.appendChild(c);
+    });
+  }
+  function show(k){
+    cur=k;
+    [].forEach.call(tabs.children,function(t){t.setAttribute("aria-selected",t.dataset.k===k)});
+    grid.textContent="";
+    D[k].forEach(function(s){
+      var c=document.createElement("div");c.className="card";
+      var t=document.createElement("div");t.className="tile";t.textContent=s[3];t.setAttribute("aria-hidden","true");t.style.background="linear-gradient(135deg,"+s[4]+")";
+      var b=document.createElement("div");b.className="b";
+      var h=document.createElement("h3");h.textContent=s[0];
+      var e=document.createElement("em");e.textContent=s[1];
+      var p=document.createElement("p");p.textContent=s[2];
+      var btn=document.createElement("button");btn.type="button";btn.className="btn sm";
+      var has=L.indexOf(s[0])>-1;btn.textContent=has?"On your list":"Add to watchlist";btn.disabled=has;
+      btn.onclick=function(){L.push(s[0]);save();renderList();show(cur)};
+      b.appendChild(h);b.appendChild(e);b.appendChild(p);b.appendChild(btn);c.appendChild(t);c.appendChild(b);grid.appendChild(c);
+    });
+  }
+  Object.keys(D).forEach(function(k){
+    var b=document.createElement("button");b.className="tab";b.type="button";b.setAttribute("role","tab");b.dataset.k=k;b.textContent=T[k];
+    b.onclick=function(){show(k)};tabs.appendChild(b);
+  });
+  show("Action");renderList();
+
+  var Q=[
+    ["What do you want from a story?",["Big fights and power-ups","Heart and emotion","A twisty mystery"]],
+    ["Pick a setting.",["A world of ninjas and heroes","A magical or spirit world","Sci-fi or the future"]],
+    ["How long should it be?",["A long journey","A satisfying mid-length series","A single film or short run"]]
+  ],R=[["Naruto","Long-running action about perseverance and friendship."],["Demon Slayer","Beautiful fights with a heartfelt core."],["Your Name","A short, emotional film you will not forget."],["Steins;Gate","A time-travel thriller that rewards patience."],["Fullmetal Alchemist: Brotherhood","A complete epic with something for everyone."],["Spirited Away","A timeless film full of wonder."]],
+  qz=document.getElementById("qz"),qi=0,sc=0;
+  function ask(){
+    qz.textContent="";
+    if(qi>=Q.length){
+      var r=R[sc%R.length];
+      var a=document.createElement("p");a.textContent="Watch this next";
+      var h=document.createElement("div");h.className="res";h.textContent=r[0];
+      var t=document.createElement("p");t.textContent=r[1];
+      var x=document.createElement("button");x.className="btn alt";x.type="button";x.textContent="Try again";x.onclick=function(){qi=0;sc=0;ask()};
+      [a,h,t,x].forEach(function(e){qz.appendChild(e)});return;
+    }
+    var q=document.createElement("h3");q.textContent=(qi+1)+" of "+Q.length+": "+Q[qi][0];qz.appendChild(q);
+    Q[qi][1].forEach(function(o,k){
+      var b=document.createElement("button");b.className="btn alt opt";b.type="button";b.textContent=o;
+      b.onclick=function(){sc+=k+qi;qi++;ask()};qz.appendChild(b);
+    });
+  }
+  ask();
+
+  var inp=document.getElementById("upl"),wall=document.getElementById("wall"),msg=document.getElementById("ast"),we=document.getElementById("wempty");
+  inp.addEventListener("change",function(){
+    var ok=0,bad=0;
+    [].forEach.call(inp.files,function(f){
+      if(!/^image\//.test(f.type)){bad++;return}
+      if(we){we.remove();we=null}
+      var fig=document.createElement("figure"),im=document.createElement("img"),cap=document.createElement("figcaption"),nm=f.name.replace(/\.[^.]+$/,"");
+      im.src=URL.createObjectURL(f);im.alt="Fan art: "+nm;cap.textContent=nm;
+      fig.appendChild(im);fig.appendChild(cap);wall.appendChild(fig);ok++;
+    });
+    msg.className="status"+(bad&&!ok?" err":"");
+    msg.textContent=bad&&!ok?"That file is not an image. Try a PNG or JPG.":ok+" piece"+(ok===1?"":"s")+" added to your wall.";
+    inp.value="";
+  });
+
+  if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+    var h=document.getElementById("hero");
+    for(var i=0;i<18;i++){
+      var p=document.createElement("span");p.className="petal";p.setAttribute("aria-hidden","true");
+      p.style.left=(Math.random()*100)+"%";p.style.animationDuration=(7+Math.random()*8)+"s";p.style.animationDelay=(-Math.random()*12)+"s";
+      h.appendChild(p);
+    }
+  }
+})();
+</script>
+</body>
+</html>
